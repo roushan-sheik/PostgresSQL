@@ -40,6 +40,6 @@ SELECT * FROM person2;
 -- delete all table records
  TRUNCATE table person; 
 -- insert data
-INSERT INTO person VALUES(1, 'arifa', 22); 
+INSERT INTO person VALUES(1, 'Zannat', 22); 
 
 SELECT * from person;
