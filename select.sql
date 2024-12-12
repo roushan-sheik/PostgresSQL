@@ -46,3 +46,53 @@ SELECT firstname, email as "Student Email", age FROM student;
 -- ========= sorting ============
 SELECT * FROM student ORDER BY firstname ASC;
 SELECT * FROM student ORDER BY firstname DESC;
+
+
+--  ==================================> Filtering <=====================================
+--  ====================================================================================
+-- filter all the unique country 
+SELECT DISTINCT country from student;
+
+-- Data filtering >>>>>>>>>>>>>>
+
+-- Select student from the USA
+-- Select student with 'A' grade in Physics
+-- Select student with a specific blood group ('A+')
+-- Select student from the USA or from Australia
+-- Select student from the USA or from Australia and the age is 20
+-- Select student with a grade of 'A' or 'B' in Math or Physics
+-- Select student older then 20
+
+-- Select student from the USA
+SELECT * from student
+     WHERE country = 'USA';
+-- Select student with 'A' grade in Physics
+SELECT * FROM student
+    WHERE grade = 'M'
+-- Select student with a specific blood group ('A+')
+SELECT * from student
+    WHERE bloodgroup = 'A+';
+
+-- Select student from the USA or from Australia
+SELECT * FROM student
+    WHERE country = 'Australia' OR country = 'USA'
+
+-- Select student from the USA or from Australia and the age is 20
+SELECT * FROM student
+     WHERE (country ='Australia' OR country = 'USA') AND age = 20
+
+-- Select student older then 20
+SELECT * FROM student
+     WHERE  age > 20;
+
+-- Select student older then 20 amd course Biology
+SELECT * FROM student
+     WHERE  age > 20 AND course = 'Biology';
+
+-- Select student older then 20  
+SELECT * FROM student
+     WHERE  age > 20  ;
+
+-- Select all the student2 without age 20 
+SELECT * FROM student
+     WHERE  age <> 20  
