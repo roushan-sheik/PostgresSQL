@@ -5,7 +5,7 @@ SELECT * from student;
  DELETE FROM student
     WHERE grade = '2';
 
---NOTE: We can use all operators with DELETE like: AND , OR , NOT , Etc.
+--NOTE: We can use multiple condition and all operators with DELETE like: AND , OR , NOT , Etc.
 
  DELETE FROM student
     WHERE grade = 'M' country = 'USA';
