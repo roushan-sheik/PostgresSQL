@@ -96,3 +96,33 @@ SELECT * FROM student
 -- Select all the student2 without age 20 
 SELECT * FROM student
      WHERE  age <> 20  
+
+-- convert to upper case 
+
+SELECT  upper(firstname)as firstname_with_upper  FROM student;
+
+-- scalar function  =====================>
+-- concat first name and last name 
+SELECT concat(firstname,' ', lastname) FROM student;
+
+SELECT length(firstname) from student;
+SELECT lower(firstname) from student;
+SELECT upper(firstname) from student;
+
+-- aggregate function  =====================>
+-- AVG()
+-- MAX()
+-- MIN()
+-- SUM()
+-- COUNT()
+SELECT   avg(age) from student;
+SELECT   max(age) from student;
+SELECT   min(age) from student;
+SELECT   sum(age) from student;
+SELECT   count(age) from student;
+-- scalar with aggregate
+SELECT   max(length(firstname  )) from student;
+
+-- NOT !==
+SELECT * from student
+     WHERE NOT country = 'USA';
