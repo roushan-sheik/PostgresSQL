@@ -1,6 +1,6 @@
 SELECT * from  student
     WHERE email != NULL;
- SELECT * from student;
+ SELECT * from student;   
 SELECT * from student
      WHERE email IS NULL;
 SELECT * from student
@@ -33,7 +33,7 @@ SELECT * from student
 -- find those students name length is 4 and  second character small 'a' 
 SELECT * from student
      WHERE firstname LIKE '_a__';
-     
+
 -- >>>>>>>>>>>> ILIKE (Not Case Sensitive)>>>>>>>>>>>>>>>>>>
 -- find those students name starts with 'J'
 SELECT * from student
