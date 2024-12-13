@@ -1,41 +1,64 @@
-SELECT * from  student
+SELECT * FROM student
     WHERE email != NULL;
- SELECT * from student;   
-SELECT * from student
-     WHERE email IS NULL;
-SELECT * from student
-     WHERE email IS NOT NULL;
+-- Incorrect way to check for NULL, use IS NULL or IS NOT NULL
+-- NULL এর সাথে তুলনা করার জন্য ভুল পদ্ধতি, IS NULL বা IS NOT NULL ব্যবহার করুন
 
-SELECT * from student;
--- null handling wit COALESCE() ==============>
-SELECT COALESCE(email, 'Email Not Provided')as "User Email", firstname, age  FROM student;
---=========== select student from USA, UK , Canada ==============>
+SELECT * FROM student;
+
+SELECT * FROM student
+    WHERE email IS NULL;
+-- This query selects students with a NULL email.
+-- এই কোয়েরি সেই ছাত্রদের নির্বাচন করবে যাদের ইমেইল NULL।
+
+SELECT * FROM student
+    WHERE email IS NOT NULL;
+-- This query selects students with a non-NULL email.
+-- এই কোয়েরি সেই ছাত্রদের নির্বাচন করবে যাদের ইমেইল NULL নয়।
+
+SELECT * FROM student;
+
+-- NULL handling with COALESCE()
+-- COALESCE() will return the first non-NULL value from the list.
+-- NULL হ্যান্ডলিং COALESCE() এর মাধ্যমে করা হচ্ছে।
+SELECT COALESCE(email, 'Email Not Provided') AS "User Email", firstname, age FROM student;
+-- If email is NULL, it will return 'Email Not Provided' instead of NULL.
+-- যদি ইমেইল NULL হয়, তবে এটি 'Email Not Provided' দেখাবে।
+
+-- Select students from USA, UK, Canada
+-- USA, UK, কানাডা থেকে ছাত্র নির্বাচন করা হচ্ছে
 SELECT * FROM student WHERE country = 'USA' OR country = 'UK' OR country = 'Canada';
--- more simple way
 
- SELECT * FROM student WHERE country IN('USA', 'UK', 'Canada');
- -- NOT 
- SELECT * FROM student WHERE country NOT IN('USA', 'UK', 'Canada');
+-- More simple way to achieve the same result
+-- একই ফলাফল পেতে আরও সহজ পদ্ধতি
+SELECT * FROM student WHERE country IN('USA', 'UK', 'Canada');
+
+-- Exclude students from USA, UK, and Canada
+-- USA, UK, এবং কানাডা বাদ দিয়ে ছাত্র নির্বাচন করা হচ্ছে
+SELECT * FROM student WHERE country NOT IN('USA', 'UK', 'Canada');
 
 -- BETWEEN range
--- Select those person age is greater than 20 and less than 25
- SELECT * from student
-     WHERE age BETWEEN 20 and 25 ORDER BY age;
+-- Select students with age between 20 and 25
+-- বয়স ২০ থেকে ২৫ এর মধ্যে যারা ছাত্র তাদের নির্বাচন করা হচ্ছে
+SELECT * FROM student
+    WHERE age BETWEEN 20 AND 25 ORDER BY age;
 
--- Like Operator (Case Sensitive)
--- find those students name starts with capital 'J'
-SELECT * from student
-     WHERE firstname LIKE 'J%';
--- find those students name ends with small 'n' 
-SELECT * from student
-     WHERE firstname LIKE '%n';
+-- LIKE Operator (Case Sensitive)
+-- Case Sensitive অনুসন্ধান (LIKE)
+-- Find students whose names start with capital 'J'
+SELECT * FROM student
+    WHERE firstname LIKE 'J%';
 
--- find those students name length is 4 and  second character small 'a' 
-SELECT * from student
-     WHERE firstname LIKE '_a__';
+-- Find students whose names end with lowercase 'n'
+SELECT * FROM student
+    WHERE firstname LIKE '%n';
 
--- >>>>>>>>>>>> ILIKE (Not Case Sensitive)>>>>>>>>>>>>>>>>>>
--- find those students name starts with 'J'
-SELECT * from student
-     WHERE firstname ILIKE 'j%';
- 
+-- Find students whose names are exactly 4 characters long and the second character is lowercase 'a'
+SELECT * FROM student
+    WHERE firstname LIKE '_a__';
+
+-- >>>>>>>>>>>> ILIKE (Not Case Sensitive) >>>>>>>>>>>>>>>>
+-- Find students whose names start with 'J', case-insensitive
+SELECT * FROM student
+    WHERE firstname ILIKE 'j%';
+-- The ILIKE operator is used for case-insensitive matching.
+-- ILIKE অপারেটরটি কেস-ইনসেন্সিটিভ মেচিং এর জন্য ব্যবহৃত হয়।

@@ -1,26 +1,54 @@
-SHOW timezone; -- Asia/Dhaka
--- timestamps with time zone 
--- timestamps without time zone 
+-- Show the current timezone  
+-- (বর্তমান টাইমজোন দেখান।)
+SHOW timezone; -- Example: Asia/Dhaka
+
+-- Retrieve the current timestamp with and without the timezone  
+-- (টাইমজোন সহ এবং টাইমজোন ছাড়া বর্তমান টাইমস্ট্যাম্প দেখান।)
 SELECT now();
 
-CREATE TABLE aboutTime (time_stamp TIMESTAMP WITHOUT TIME ZONE,time_zone TIMESTAMP WITH TIME ZONE);
+-- Create a table with two timestamp columns: one without time zone and one with time zone  
+-- (দুই টাইমস্ট্যাম্প কলামসহ একটি টেবিল তৈরি করুন: একটি টাইমজোন ছাড়া এবং একটি টাইমজোন সহ।)
+CREATE TABLE aboutTime (
+    time_stamp TIMESTAMP WITHOUT TIME ZONE,
+    time_zone TIMESTAMP WITH TIME ZONE
+);
+
+-- Insert data into the "aboutTime" table  
+-- (aboutTime টেবিলে ডেটা যোগ করুন।)
+INSERT INTO aboutTime VALUES ('2024-02-16 10:45:13', '2024-02-16 10:45:13');
+
+-- Retrieve all data from the "aboutTime" table  
+-- (aboutTime টেবিল থেকে সব ডেটা বের করুন।)
 SELECT * FROM aboutTime;
-INSERT INTO abouttime VALUES ('2024-02-16 10:45:13', '2024-02-16 10:45:13') ;
 
+-- Show the current timestamp  
+-- (বর্তমান টাইমস্ট্যাম্প দেখান।)
 SELECT now();
+
+-- Show the current date  
+-- (বর্তমান তারিখ দেখান।)
 SELECT CURRENT_DATE;
-SELECT now()::date; -- date casting
-SELECT now()::time; -- time casting
 
--- get date by spec format 
+-- Convert the current timestamp to date only (date casting)  
+-- (টাইমস্ট্যাম্প থেকে শুধু তারিখ দেখানোর জন্য কাস্ট করুন।)
+SELECT now()::date;
+
+-- Convert the current timestamp to time only (time casting)  
+-- (টাইমস্ট্যাম্প থেকে শুধু সময় দেখানোর জন্য কাস্ট করুন।)
+SELECT now()::time;
+
+-- Get the date in a specific format (DD/MM/YYYY)  
+-- (নির্দিষ্ট ফরম্যাটে তারিখ দেখান (DD/MM/YYYY)।)
 SELECT to_char(now(), 'dd/mm/yyyy');
--- calculate student age by date of birth 
 
-SELECT *, age(CURRENT_DATE,dateofbirth ) FROM student;
+-- Calculate a student's age using their date of birth  
+-- (ছাত্রের জন্ম তারিখ ব্যবহার করে বয়স হিসাব করুন।)
+SELECT *, age(CURRENT_DATE, dateofbirth) FROM student;
 
--- extract 
+-- Extract the year from a date  
+-- (তারিখ থেকে বছরের অংশ বের করুন।)
+SELECT extract(year FROM '1999-04-03'::date); -- :: type casting
 
-SELECT extract(year from '1999-04-03'::date); // :: type casting 
-
--- type casting 
-SELECT 1::BOOLEAN 
+-- Type casting example: Convert an integer to a boolean  
+-- (টাইপ কাস্টিং উদাহরণ: ইন্টিজারকে বুলিয়ানে রূপান্তর করুন।)
+SELECT 1::BOOLEAN;

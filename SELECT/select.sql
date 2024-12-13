@@ -1,18 +1,21 @@
 -- Active: 1733933996548@@127.0.0.1@5432@testdb
+ 
 CREATE TABLE student (
-    id SERIAL PRIMARY KEY,
-    firstName VARCHAR(50) NOT NULL,
-    lastName VARCHAR(50),
-    age INT,
-    grade CHAR(2),
-    course VARCHAR(50),
-    email VARCHAR(100) UNIQUE,
-    dateOfBirth DATE,
-    bloodGroup VARCHAR(5),
-    country VARCHAR(30)
+    id SERIAL PRIMARY KEY,           -- ID column with auto-increment
+    firstName VARCHAR(50) NOT NULL,   -- First name (cannot be null)
+    lastName VARCHAR(50),             -- Last name
+    age INT,                          -- Age of student
+    grade CHAR(2),                    -- Grade (e.g., M for Male, F for Female)
+    course VARCHAR(50),               -- Course name
+    email VARCHAR(100) UNIQUE,        -- Unique email address
+    dateOfBirth DATE,                 -- Date of birth
+    bloodGroup VARCHAR(5),            -- Blood group
+    country VARCHAR(30)               -- Country of residence
 )
 
-INSERT INTO student (id, firstName , lastName , age, grade, course, email, dateOfBirth, bloodGroup,country)
+-- Inserting sample student data into the student table
+-- ছাত্রদের ডেটা ইনসার্ট করা হচ্ছে
+INSERT INTO student (id, firstName, lastName, age, grade, course, email, dateOfBirth, bloodGroup, country)
 VALUES  
     (1, 'John', 'Doe', 20, 'M', 'Math', 'johndoe@gmail.com', '2004-01-15', 'O+', 'USA'),
     (2, 'Jane', 'Smith', 22, 'F', 'Biology', 'janesmith@gmail.com', '2002-05-10', 'A-', 'Canada'),
@@ -32,97 +35,97 @@ VALUES
     (16, 'Mia', 'Lee', 21, 'F', 'Music', 'miale@gmail.com', '2003-09-20', 'B+', 'China'),
     (17, 'Ethan', 'Hall', 23, 'M', 'Theater', 'ethanhall@gmail.com', '2001-02-15', 'O-', 'USA'),
     (18, 'Emily', 'Perez', 24, 'F', 'Dance', 'emilyperez@gmail.com', '2000-10-05', 'B-', 'Mexico'),
-    (19, 'Daniel', 'Moore', 26, 'M', 'Film', 'danielmoore@gmail.com', '1998-06-10', 'AB-', 'UK')
-     
--- Query ==========================================>
+    (19, 'Daniel', 'Moore', 26, 'M', 'Film', 'danielmoore@gmail.com', '1998-06-10', 'AB-', 'UK');
+
+-- Query to fetch data from person table (Note: this should be "student" table)
+-- "person" টেবিল থেকে ডেটা নেওয়ার জন্য কুয়েরি (এটি "student" টেবিল হওয়া উচিত)
 SELECT * FROM person;
+
+-- Select email and age of all students
 SELECT email, age FROM student;
 
--- Name aleas 
+-- Alias for email column
+-- "email" কলামের জন্য এলিয়াস
 SELECT email as student_email FROM student;
--- note: single quote for string and dubble quote for column
+
+-- Notes:
+-- Single quotes for string literals, double quotes for column aliases.
+-- স্ট্রিং লিটারদের জন্য একক কোট ব্যবহার করুন, কলাম এলিয়াসের জন্য ডাবল কোট ব্যবহার করুন।
 SELECT firstname, email as "Student Email", age FROM student;
 
--- ========= sorting ============
-SELECT * FROM student ORDER BY firstname ASC;
-SELECT * FROM student ORDER BY firstname DESC;
+-- ========= Sorting ============
 
+-- Sorting by first name in ascending order
+SELECT * FROM student ORDER BY firstname ASC;  -- Increasing order (A-Z)
+SELECT * FROM student ORDER BY firstname DESC; -- Decreasing order (Z-A)
 
---  ==================================> Filtering <=====================================
---  ====================================================================================
--- filter all the unique country 
-SELECT DISTINCT country from student;
+-- ==================================> Filtering <=====================================
+-- ====================================================================================
+
+-- Filter all unique countries
+SELECT DISTINCT country FROM student;  -- Find distinct (unique) countries
 
 -- Data filtering >>>>>>>>>>>>>>
 
--- Select student from the USA
--- Select student with 'A' grade in Physics
--- Select student with a specific blood group ('A+')
--- Select student from the USA or from Australia
--- Select student from the USA or from Australia and the age is 20
--- Select student with a grade of 'A' or 'B' in Math or Physics
--- Select student older then 20
+-- Select students from the USA
+SELECT * FROM student WHERE country = 'USA';
 
--- Select student from the USA
-SELECT * from student
-     WHERE country = 'USA';
--- Select student with 'A' grade in Physics
-SELECT * FROM student
-    WHERE grade = 'M'
--- Select student with a specific blood group ('A+')
-SELECT * from student
-    WHERE bloodgroup = 'A+';
+-- Select students with 'M' grade in Physics course
+SELECT * FROM student WHERE grade = 'M' AND course = 'Physics';
 
--- Select student from the USA or from Australia
-SELECT * FROM student
-    WHERE country = 'Australia' OR country = 'USA'
+-- Select students with a specific blood group ('A+')
+SELECT * FROM student WHERE bloodgroup = 'A+';
 
--- Select student from the USA or from Australia and the age is 20
-SELECT * FROM student
-     WHERE (country ='Australia' OR country = 'USA') AND age = 20
+-- Select students from the USA or from Australia
+SELECT * FROM student WHERE country = 'USA' OR country = 'Australia';
 
--- Select student older then 20
-SELECT * FROM student
-     WHERE  age > 20;
+-- Select students from the USA or from Australia and the age is 20
+SELECT * FROM student WHERE (country = 'USA' OR country = 'Australia') AND age = 20;
 
--- Select student older then 20 amd course Biology
-SELECT * FROM student
-     WHERE  age > 20 AND course = 'Biology';
+-- Select students older than 20
+SELECT * FROM student WHERE age > 20;
 
--- Select student older then 20  
-SELECT * FROM student
-     WHERE  age > 20  ;
+-- Select students older than 20 and studying Biology
+SELECT * FROM student WHERE age > 20 AND course = 'Biology';
 
--- Select all the student2 without age 20 
-SELECT * FROM student
-     WHERE  age <> 20  
+-- Select students who are not 20 years old
+SELECT * FROM student WHERE age <> 20;  -- `<>` means "not equal to"
 
--- convert to upper case 
+-- Convert the first name to uppercase
+SELECT upper(firstname) AS firstname_with_upper FROM student;
 
-SELECT  upper(firstname)as firstname_with_upper  FROM student;
+-- Scalar functions =====================>
 
--- scalar function  =====================>
--- concat first name and last name 
-SELECT concat(firstname,' ', lastname) FROM student;
+-- Concatenate first name and last name
+SELECT concat(firstname, ' ', lastname) FROM student;
 
-SELECT length(firstname) from student;
-SELECT lower(firstname) from student;
-SELECT upper(firstname) from student;
+-- Get the length of the first name
+SELECT length(firstname) FROM student;
 
--- aggregate function  =====================>
--- AVG()
--- MAX()
--- MIN()
--- SUM()
--- COUNT()
-SELECT   avg(age) from student;
-SELECT   max(age) from student;
-SELECT   min(age) from student;
-SELECT   sum(age) from student;
-SELECT   count(age) from student;
--- scalar with aggregate
-SELECT   max(length(firstname  )) from student;
+-- Convert first name to lowercase and uppercase
+SELECT lower(firstname) FROM student;
+SELECT upper(firstname) FROM student;
 
--- NOT !==
-SELECT * from student
-     WHERE NOT country = 'USA';
+-- Aggregate functions =====================>
+
+-- Find average age
+SELECT avg(age) FROM student;
+
+-- Find the maximum age
+SELECT max(age) FROM student;
+
+-- Find the minimum age
+SELECT min(age) FROM student;
+
+-- Find the total sum of ages
+SELECT sum(age) FROM student;
+
+-- Count the number of students
+SELECT count(age) FROM student;
+
+-- Scalar function with aggregate
+SELECT max(length(firstname)) FROM student;  -- Find max length of first name
+
+-- NOT operator !==
+-- Select students who are not from the USA
+SELECT * FROM student WHERE NOT country = 'USA';  -- Equivalent to country <> 'USA'
