@@ -20,11 +20,12 @@ SELECT * from "post" as p
 SELECT * from "post" as p 
  RIGHT JOIN "user" as u on p.id = u.id;
 -- user left join
+-- OUTER is Optional You will get the same output
 SELECT * from "user" as u 
- LEFT JOIN "post" as p on u.id = p.user_id;
+ LEFT OUTER JOIN "post" as p on u.id = p.user_id;
 -- user right join
 SELECT * from "user" as u 
- RIGHT JOIN "post" as p on u.id = p.user_id;
+ RIGHT OUTER JOIN "post" as p on u.id = p.user_id;
 
 
 -- Explanation of Inner Join:
